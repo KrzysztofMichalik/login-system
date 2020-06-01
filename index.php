@@ -1,6 +1,12 @@
 <?php
 require_once('init.php');
 require_once('form.php');
+if(!empty($_POST) ) {
+  $html = loginsys($_POST);
+} else {
+  $html = array();
+  $html[0] = false;
+}
 
 ?>
 <!DOCTYPE html>
@@ -43,8 +49,7 @@ require_once('form.php');
       <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <div class="navbar-nav ml-auto">
             <?php
-            if(!empty($_POST) ) {
-              $html = loginsys($_POST);
+            // tutaj niepotrzebnie sprawdzanie warunku zmiennej $_POST;
 
               if ($html[0] == true) {
                 print '<form action="index.php" method="post">'.
@@ -53,9 +58,9 @@ require_once('form.php');
              else {
               print '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginForm">LogIn</button>';
             }
-          } else {
-              print '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginForm">LogIn</button>';
-          }
+          // } else {
+          //     print '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginForm">LogIn</button>';
+          // }
             ?>
           </button>
           <!-- Modal -->
@@ -103,14 +108,14 @@ require_once('form.php');
         <div class="pt-5 mx-auto">
           <?php
             if(!empty($_POST)) {
-              $html_to_print = loginsys($_POST);
-              echo $html_to_print[1];
-              $flag = $html_to_print[0];
-              return $html_to_print;
+
+              echo $html[1];
+
             }
           ?>
         </div>
       </div>
     </div>
+    <?php var_dump($_SESSION); ?>
   </body>
 </html>
